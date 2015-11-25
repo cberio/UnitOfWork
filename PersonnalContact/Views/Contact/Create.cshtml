@@ -1,0 +1,99 @@
+﻿@model Contacts.Repository.Contact
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Contact</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MobileNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MobileNo)
+            @Html.ValidationMessageFor(model => model.MobileNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HomePhoneNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HomePhoneNo)
+            @Html.ValidationMessageFor(model => model.HomePhoneNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfficePhoneNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfficePhoneNo)
+            @Html.ValidationMessageFor(model => model.OfficePhoneNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrganizationName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrganizationName)
+            @Html.ValidationMessageFor(model => model.OrganizationName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MiddleName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MiddleName)
+            @Html.ValidationMessageFor(model => model.MiddleName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SSN)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SSN)
+            @Html.ValidationMessageFor(model => model.SSN)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

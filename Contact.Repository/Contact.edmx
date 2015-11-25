@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ContactDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ContactDBModelStoreContainer">
+    <EntitySet Name="Addresses" EntityType="ContactDBModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contacts" EntityType="ContactDBModel.Store.Contacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactAddresses" EntityType="ContactDBModel.Store.ContactAddresses" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PersonAddress_Address" Association="ContactDBModel.Store.FK_PersonAddress_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="ContactAddress" EntitySet="ContactAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactAddress_Contact" Association="ContactDBModel.Store.FK_ContactAddress_Contact">
+      <End Role="Contact" EntitySet="Contacts" />
+      <End Role="ContactAddress" EntitySet="ContactAddresses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Line1" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Line2" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="State" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="HomePhoneNo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="OfficePhoneNo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="OrganizationName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="SSN" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContactAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactId" Type="int" Nullable="true" />
+    <Property Name="AddressId" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_PersonAddress_Address">
+    <End Role="Address" Type="ContactDBModel.Store.Addresses" Multiplicity="0..1" />
+    <End Role="ContactAddress" Type="ContactDBModel.Store.ContactAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactAddress">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactAddress_Contact">
+    <End Role="Contact" Type="ContactDBModel.Store.Contacts" Multiplicity="0..1" />
+    <End Role="ContactAddress" Type="ContactDBModel.Store.ContactAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactAddress">
+        <PropertyRef Name="ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContactDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ContactDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="ContactDBModel.Address" />
+          <EntitySet Name="Contacts" EntityType="ContactDBModel.Contact" />
+          <EntitySet Name="ContactAddresses" EntityType="ContactDBModel.ContactAddress" />
+          <AssociationSet Name="FK_PersonAddress_Address" Association="ContactDBModel.FK_PersonAddress_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="ContactAddress" EntitySet="ContactAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactAddress_Contact" Association="ContactDBModel.FK_ContactAddress_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="ContactAddress" EntitySet="ContactAddresses" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Line1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Line2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContactAddresses" Relationship="ContactDBModel.FK_PersonAddress_Address" FromRole="Address" ToRole="ContactAddress" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="MobileNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HomePhoneNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OfficePhoneNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Type" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OrganizationName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SSN" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContactAddresses" Relationship="ContactDBModel.FK_ContactAddress_Contact" FromRole="Contact" ToRole="ContactAddress" />
+        </EntityType>
+        <EntityType Name="ContactAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ContactId" />
+          <Property Type="Int32" Name="AddressId" />
+          <NavigationProperty Name="Address" Relationship="ContactDBModel.FK_PersonAddress_Address" FromRole="ContactAddress" ToRole="Address" />
+          <NavigationProperty Name="Contact" Relationship="ContactDBModel.FK_ContactAddress_Contact" FromRole="ContactAddress" ToRole="Contact" />
+        </EntityType>
+        <Association Name="FK_PersonAddress_Address">
+          <End Type="ContactDBModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="ContactDBModel.ContactAddress" Role="ContactAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactAddress">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactAddress_Contact">
+          <End Type="ContactDBModel.Contact" Role="Contact" Multiplicity="0..1" />
+          <End Type="ContactDBModel.ContactAddress" Role="ContactAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactAddress">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContactDBModelStoreContainer" CdmEntityContainer="ContactDBEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactDBModel.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Line1" ColumnName="Line1" />
+          <ScalarProperty Name="Line2" ColumnName="Line2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactDBModel.Contact)">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="HomePhoneNo" ColumnName="HomePhoneNo" />
+          <ScalarProperty Name="OfficePhoneNo" ColumnName="OfficePhoneNo" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactAddresses">
+      <EntityTypeMapping TypeName="IsTypeOf(ContactDBModel.ContactAddress)">
+        <MappingFragment StoreEntitySet="ContactAddresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

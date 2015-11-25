@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/1.css")
+        @Scripts.Render("~/bundles/modernizr")
+
+
+
+
+
+
+
+
+
+    </head>
+    <body>
+       <a name="top" id="top"></a>
+        <center>
+  <div id="menu"> @Html.ActionLink("Home","Index","Home")
+   
+ 
+  <div id="content"> 
+
+      </div>
+    
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+       
+
+</center>
+
+    </body>
+</html>
